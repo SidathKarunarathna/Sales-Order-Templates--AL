@@ -21,10 +21,9 @@ pageextension 50104 "Sales Order Card Ext" extends "Sales Order"
                 TemplateCode := SalesOrderTemplateMgt.SelectCustomerTemplate();
                 SalesOrdertemplate.get(TemplateCode);
                 NoSeriesMgt.InitSeries(SalesOrdertemplate."No. Series", '', SalesHeader."Posting Date", SalesHeader."No.", SalesHeader."No. Series");
-
+                NoSeriesMgt.InitSeries(SalesOrdertemplate."Posted No.Series",'',SalesHeader."Posting Date",SalesHeader."Posting No.",SalesHeader."Posting No. Series");
                 SalesHeader."Document Type" := SalesHeader."Document Type"::Order;
                 SalesHeader."Your Reference" := SalesOrdertemplate."Your Reference";
-                SalesHeader."Posting No. Series" := SalesOrdertemplate."Posted No.Series";
                 SalesHeader.Insert(true);
                 Commit();
                 Rec.Copy(SalesHeader);
