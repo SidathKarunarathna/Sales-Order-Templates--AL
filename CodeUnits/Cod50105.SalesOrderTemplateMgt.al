@@ -1,6 +1,6 @@
 codeunit 50105 "Sales Order Template Mgt"
 {
-  procedure SelectCustomerTemplate() Result: Code[20]
+    procedure SelectCustomerTemplate() Result: Code[20]
     var
         SalesOrderTempl: Record "Sales Order Templates";
         SelectSalesOrderTemplList: Page "Sales Order Template List";
@@ -11,15 +11,12 @@ codeunit 50105 "Sales Order Template Mgt"
             SelectSalesOrderTemplList.LookupMode(true);
             if SelectSalesOrderTemplList.RunModal() = Action::LookupOK then begin
                 SelectSalesOrderTemplList.GetRecord(SalesOrderTempl);
+
                 exit(SalesOrderTempl."Template Code");
             end;
         end;
 
     end;
-    local procedure MyProcedure()
-    var
-        NoSeriesMgt : Codeunit NoSeriesManagement;
-    begin
-        
-    end;
+
+
 }
