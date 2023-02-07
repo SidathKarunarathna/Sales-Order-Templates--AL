@@ -3,7 +3,7 @@ page 50100 "Sales Order Template Card"
     Caption = 'Sales Order Template Card';
     PageType = Card;
     SourceTable = "Sales Order Templates";
-    
+
     layout
     {
         area(content)
@@ -35,6 +35,17 @@ page 50100 "Sales Order Template Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Your Reference field.';
                 }
+                field("Sell-to-Customer-No.";Rec."Sell-to-Customer-No.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Sell-to-Customer-No."  field.';
+                }
+            }
+            part("Sales Order Template Line"; "Sales Order Template Line")
+            {
+                SubPageLink = "Template Code" = field("Template Code");
+                ApplicationArea = all;
+                UpdatePropagation = Both;
             }
         }
     }
