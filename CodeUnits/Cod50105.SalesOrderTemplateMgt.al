@@ -1,6 +1,6 @@
 codeunit 50105 "Sales Order Template Mgt"
 {
-    procedure SelectCustomerTemplate() Result: Code[20]
+    procedure SelectSalesTemplate() Result: Code[20]
     var
         SalesOrderTempl: Record "Sales Order Templates";
         SelectSalesOrderTemplList: Page "Sales Order Template List";
@@ -16,6 +16,17 @@ codeunit 50105 "Sales Order Template Mgt"
         end;
 
     end;
+    procedure SelectCustomerNo(var SalesOrderTemplate:Record "Sales Order Templates"):Code[20]
+    var
+    customer:Record Customer;
+    PickACustomer: page "Pick Customer Page";
+    begin
+        if SalesOrderTemplate."Sell-to-Customer-No."='' then
+           if PickACustomer.RunModal()=Action::LookupOK then begin
+                PickACustomer.GetCustomerNo()
+            end
+    end;
+    
 
     [EventSubscriber(ObjectType::Table, Database::"Sales Header", 'OnTestStatusIsNotReleased', '', true, true)]
     local procedure OnTestStatusIsNotReleased(var NotReleased: Boolean; SalesHeader: Record "Sales Header")
