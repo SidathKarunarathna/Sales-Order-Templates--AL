@@ -18,5 +18,21 @@ codeunit 50105 "Sales Order Template Mgt"
 
     end;
 
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", 'OnTestStatusIsNotReleased', '', true, true)]
+    local procedure OnTestStatusIsNotReleased(var NotReleased: Boolean; SalesHeader: Record "Sales Header")
+    var
+    SalesOrder:Page "Sales Order";
+    begin
+        if SalesHeader.NotRefreshed then begin
+            NotReleased := false;
+            SalesHeader.NotRefreshed := false;
+            SalesHeader.Modify();
+            SalesOrder.SetRecord(SalesHeader);
+            SalesOrder.Run();
+            
 
+            
+        end;
+            
+    end;
 }

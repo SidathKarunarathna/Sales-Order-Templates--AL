@@ -87,6 +87,7 @@ table 50107 "Sales Order Templates Line"
         {
             Caption = 'Quantity';
             DataClassification = ToBeClassified;
+            DecimalPlaces = 0 : 5;
         }
     }
     keys

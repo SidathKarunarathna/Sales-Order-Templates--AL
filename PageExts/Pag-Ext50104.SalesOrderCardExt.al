@@ -1,11 +1,13 @@
 pageextension 50104 "Sales Order Card Ext" extends "Sales Order"
 {
+    
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         if GuiAllowed then
             if Rec."No." = '' then
                 NewMode := true;
+                NotRefreshed:=true;
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -28,6 +30,8 @@ pageextension 50104 "Sales Order Card Ext" extends "Sales Order"
                 SalesHeader."Document Type" := SalesHeader."Document Type"::Order;
                 SalesHeader."Your Reference" := SalesOrdertemplate."Your Reference";
                 SalesHeader.Validate("Sell-to Customer No.", SalesOrdertemplate."Sell-to-Customer-No.");
+                SalesHeader.NotRefreshed:=true;
+                
                 SalesHeader.Insert(true);
 
 
@@ -44,24 +48,29 @@ pageextension 50104 "Sales Order Card Ext" extends "Sales Order"
                             SalesLine.Validate(Quantity,SalesOrderTemplateLine.Quantity);
                             SalesLine.Insert();
                             //SalesLine.Modify();
-                            //CurrPage.Update;
+                            CurrPage.Update;
                         end until SalesOrderTemplateLine.Next() = 0;
                 end;
+                
                 Rec.Copy(SalesHeader);
-                CurrPage.Update(true);
-                //CurrPage.Close();
-                //Page.Run(42,Rec);
+                CurrPage.Update();
+                CurrPage.Close();
+                
+                
         
                 NewMode := false;
+                
             end;
-
-
-
     end;
+
+    
+    
+   
 
 
 
     var
+        NotRefreshed:Boolean;
         NewMode: Boolean;
         TemplateCode: Code[20];
 
