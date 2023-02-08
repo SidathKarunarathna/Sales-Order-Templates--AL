@@ -11,7 +11,6 @@ codeunit 50105 "Sales Order Template Mgt"
             SelectSalesOrderTemplList.LookupMode(true);
             if SelectSalesOrderTemplList.RunModal() = Action::LookupOK then begin
                 SelectSalesOrderTemplList.GetRecord(SalesOrderTempl);
-
                 exit(SalesOrderTempl."Template Code");
             end;
         end;
@@ -28,10 +27,7 @@ codeunit 50105 "Sales Order Template Mgt"
             SalesHeader.NotRefreshed := false;
             SalesHeader.Modify();
             SalesOrder.SetRecord(SalesHeader);
-            SalesOrder.Run();
-            
-
-            
+            SalesOrder.Run();   
         end;
             
     end;

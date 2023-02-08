@@ -26,7 +26,7 @@ table 50107 "Sales Order Templates Line"
             DataClassification = ToBeClassified;
             TableRelation = IF (Type = CONST(" ")) "Standard Text"
             ELSE
-            IF (Type = CONST("G/L Account")) "G/L Account"
+            IF (Type = CONST("G/L Account")) "G/L Account" where ("Direct Posting"=const(true))
             ELSE
             IF (Type = CONST(Resource)) Resource
             ELSE
